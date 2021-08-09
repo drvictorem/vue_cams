@@ -52,17 +52,19 @@ export default {
           this.zoom = 10
 
           this.createMap(this.centerCoordinates,this.zoom)
+
           
-          // console.log(this.$route.params.dataSearch)
 
           let dataFromSearch = JSON.parse(this.$route.params.dataSearch)
 
           this.addClusterToMap(dataFromSearch)
 
 
+
       } else {
 
           this.createMap(this.centerCoordinates,this.zoom)
+
 
       }
 

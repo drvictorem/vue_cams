@@ -4,9 +4,9 @@ import store from '../store/store.js'
 const routes = [
   {
     path: '/',
-    name: 'first',
+    name: 'authorization',
 
-    component: () => import( '../views/Home.vue'),
+    component: () => import( '../views/Authorization.vue'),
     props: true
   },
   {
@@ -46,13 +46,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record =>
         record.meta.requiresAuth)) {
-        if (store.getters.getStatus == 'success'){
-            
+
+        let status = JSON.parse(localStorage.getItem('authUser'))
+        if (status == 'success'){
+          // console.log(this.$store.getters('getUser'))
+
+
             next()
             return
         }
+        store.dispatch('incorrectLogin',{})
         next('/')
-    }else {
+    }
+    else {
             next()
         }
     }

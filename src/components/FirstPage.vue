@@ -2,27 +2,24 @@
 
     <div id='form'>
 
-        <el-form id='for'  label-width='120' >
+        <el-form id='for' @keyup.enter="authorization"  label-width='120' >
 
-            <label for="login">Логин</label>
 
             <el-input
 
-                placeholder=""
+                placeholder="Login"
                 v-model="login">
             </el-input>
 
-            <label for="password">Пароль</label>
 
             <el-input
 
-                placeholder=""
+                placeholder="Password"
                 type="password"
                 v-model="password">
             </el-input>
 
-            <el-button @click="loginin"
-                >Войти
+            <el-button @click="authorization"> Войти
             </el-button>
 
         </el-form>
@@ -57,19 +54,36 @@ export default {
 
 
     methods: {
-        loginin() {
+        authorization() {
             let user = {
                 login:this.login,
                 password:this.password
             }
             this.$store.dispatch('login',user)
             if (this.loggenIn == 'success') {
-                // localStorage.setItem("login", this.loggenIn )
-                console.log(localStorage.setItem("login", this.loggenIn ))
+
+                let authUser = JSON.stringify(this.loggenIn)
+                localStorage.setItem("authUser", authUser)
                 this.$router.replace('/map')
+
+                this.login = ""
+                this.password = ""
+
+            }
+            if (this.loggenIn == 'error') {
+
+              let authUser = JSON.stringify(this.loggenIn)
+              localStorage.setItem("authUser", authUser)
+
+              this.$emit('invalidData')
+
+              this.login = ""
+              this.password = ""
+
             }
 
-        }
+        },
+
         }
 
     }
@@ -80,43 +94,33 @@ export default {
 
 <style scoped lang="scss">
 
-.el-button {
-    background-color: #ffffff;
-    color: #909399;
-    // margin-top: -3%;
-}
-
-
-
 
 .el-input {
     background-color: #ffffff;
+    margin: 3% auto;
 }
 
 
 
 
 #for {
-    background-color: #FFFFFF
-}
+    padding: 1%;
 
-label {
     background-color: #FFFFFF;
-    color: #909399;
-
+    text-align: center;
 }
+
 
 #form {
     color: #303133;
-    height: 2500 px;
-    width: 500px;
-    margin:100px auto;
-    padding: 10 px;
-    padding-right:15px;
-    padding-left:15px;
-    line-height: 50px;
+    height: 50%;
+    width: 30%;
+    margin:10% auto;
+    padding: 3%;
+    padding-right:3%;
+    padding-left:3%;
     border: 1px #EBEEF5;
-    box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.5);
     background-color: #FFFFFF
 }
 

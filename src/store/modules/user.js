@@ -5,7 +5,8 @@ export default {
         user:[{
             login: "rt",
             password: "123"
-        }]
+        }],
+        showErrorMessage: null,
 
     },
 
@@ -19,11 +20,18 @@ export default {
             if (user.login == 'rt'){
                 ctx.commit('success','success')
             } else {
+                // ctx.commit()
                 ctx.commit('error','error')
             }
 
 
-        }
+        },
+
+        incorrectLogin(ctx,user) {
+
+          ctx.commit('status')
+
+        },
     },
     mutations: {
         request(state,data) {
@@ -36,7 +44,14 @@ export default {
         },
         error(state,data) {
             state.status = data
-            console.log(state.status)
+            state.showErrorMessage = true
+            console.log(state.showErrorMessage)
+
+        },
+        status(state) {
+          console.log(72873)
+          state.showErrorMessage = true
+          console.log(state.showErrorMessage)
         }
     },
 
@@ -47,6 +62,10 @@ export default {
         getUser(state) {
             console.log(state.user)
             return state.user[0].login
+        },
+        getStatusMessage(state) {
+
+          return state.showErrorMessage
         }
     },
 }

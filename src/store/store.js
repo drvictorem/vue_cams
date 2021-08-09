@@ -1,13 +1,13 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import user from './modules/user'
-import apiReq from './modules/apiReq'
+import apiRequest from './modules/apiRequest'
 
 const store = createStore({
 
     modules: {
         user,
-        apiReq
+        apiRequest
     }
 
 })
