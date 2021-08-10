@@ -38,7 +38,7 @@ export default {
         }
     },
     methods: {
-        
+
         ...mapActions(['getFromSearch']),
 
     sendRequest () {
@@ -57,6 +57,7 @@ export default {
             } else {
                 console.log('error')
             }
+            this.search = null
 
         })
 

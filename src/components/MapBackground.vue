@@ -53,7 +53,7 @@ export default {
 
           this.createMap(this.centerCoordinates,this.zoom)
 
-          
+
 
           let dataFromSearch = JSON.parse(this.$route.params.dataSearch)
 
@@ -121,8 +121,9 @@ export default {
             if(obj[i]['alt'] != ''){
                 let alt = obj[i]['latitude']
                 let lon = obj[i]['longitude']
-                let marker = this.createMarker([alt,lon],obj[i]['full_address'])
-                cluster.addLayer(marker)
+                let createMarker = this.createMarker([alt,lon],obj[i]['full_address'])
+                this.marker = createMarker
+                cluster.addLayer(this.marker)
             }
         }
 
@@ -132,6 +133,7 @@ export default {
 
     showMarker(data) {
         if (data) {
+            this.map.removeLayer(this.marker)
             console.log(data)
             this.marker = data
             this.addClusterToMap(this.marker)

@@ -10,7 +10,7 @@
                     style=" margin-top: 1%; margin-left: -39%; ">
                     <el-button
                         type="success"
-                        round size="medium"
+                        round size="mini"
                         icon="el-icon-map-location"
                         @click="redirect">
                         Показать на карте
@@ -23,7 +23,8 @@
                 v-show = "show_table"
                  :data="tableData"
                  style="width: 100%; margin-top:3%;"
-                 @selection-change="selected">
+                 @selection-change="selected"
+                 border>
                     <el-table-column
                         type="selection"
                         width="55">
@@ -80,14 +81,11 @@
 import routes from '../router/index.js'
 import axios from 'axios'
 import Autocomplite from './Autocomplite.vue'
-
 export default {
-
     name:"Search",
     components: {
         Autocomplite,
   },
-
     data () {
         return {
             tableData: [],
@@ -100,17 +98,12 @@ export default {
     },
     methods: {
         selected(row) {
-
             this.redirectButton = true
             this.selectedRow = JSON.stringify(row)
-
     },
         redirect() {
-
             this.$router.push({name: 'page_map' , params: { dataSearch: this.selectedRow }})
-
     },
-
         showdata(data) {
             this.show_table = true
             this.tableData = []
@@ -120,19 +113,13 @@ export default {
             console.log(second.data)
             // this.show_table = true
             this.tableData = second.data
-
         },
-
-
         }
     }
 </script>
 
 <style scoped lang="scss">
-
 p {
     font-size: 100%;
-
 }
-
 </style>

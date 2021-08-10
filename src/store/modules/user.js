@@ -49,7 +49,7 @@ export default {
 
         },
         status(state) {
-          console.log(72873)
+          // console.log(72873)
           state.showErrorMessage = true
           console.log(state.showErrorMessage)
         }

@@ -27,8 +27,8 @@ export default {
   computed: {
 
     statusMessage() {
-      
-      if(this.$store.getters.getStatusMessage == true) {
+
+      if(this.$store.getters.getStatusMessage === true) {
 
                 this.errorMessage()
               }
@@ -46,7 +46,7 @@ export default {
 
       }
     },
-    deep: true
+    // deep: true
 
   },
 
