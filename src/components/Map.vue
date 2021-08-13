@@ -81,21 +81,41 @@ export default {
 
           btnOpenModal: false,
           text: '',
+          cams:[],
 
     };
 
 },
-
-    // computed: {
-    //     ...mapGetters['getCams']
-    // },
-    //
-    // mounted: {
-    //
-    //     if (this.getCams) {
-    //         console.log(getCams)
-    //     }
-    // },
+//   computed: {
+//
+//     cam: {
+//
+//       get: function() {
+//         return this.$store.getters.getCams
+//       },
+//
+//       set: function(newValue) {
+//
+//         this.cams = newValue
+//
+//       }
+//     // ...mapGetters['getCams']
+//   }
+// },
+//
+//
+//   watch: {
+//
+//     'camsGet': {
+//       handler() {
+//         console.log('hbh')
+//         this.$refs.mapbck.showMarker(this.cams)
+//
+//       }
+//     },
+//     // deep: true
+//
+//   },
 
 
     methods: {
@@ -124,8 +144,14 @@ export default {
             this.getAllCameras()
             .then((response) => {
 
-                this.$refs.mapbck.showMarker(response.data);
+              if (response)
+              {
+                  console.log(response.data)
 
+                  this.$refs.mapbck.showMarker(response.data);
+                } else {
+                  this.$message.error(this.$store.getters.getError);
+                }
             })
 
         },

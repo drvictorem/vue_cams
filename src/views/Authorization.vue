@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapActions,mapGetters } from 'vuex'
+// import { mapActions,mapGetters } from 'vuex'
 import FirstPage from '@/components/FirstPage.vue'
 
 
@@ -27,11 +27,11 @@ export default {
   computed: {
 
     statusMessage() {
-
-      if(this.$store.getters.getStatusMessage === true) {
-
-                this.errorMessage()
-              }
+      //
+      // if(this.$store.getters.getStatusMessage === true) {
+      //
+      //           this.errorMessage()
+      //         }
       return this.$store.getters.getStatusMessage
     },
 
@@ -53,6 +53,7 @@ export default {
   methods: {
     errorMessage() {
       this.$message.error('Некорректные данные')
+
     },
   }
 

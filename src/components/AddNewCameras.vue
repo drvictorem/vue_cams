@@ -2,128 +2,187 @@
 
 
     <div id='form'>
-        <el-form id='for'  ref="ruleForm" label-width="120px" class="demo-ruleForm">
-            <el-form-item   label="Имя"  prop="name" >
+        <el-form id='for' :model="form" ref="form" label-width="10px"  class="demo-ruleForm">
 
-                <el-input
-                    id="in"
-                    v-model="form.name"
-                    autocomplete="off">
-                </el-input>
+          <el-row>
+            <el-col :span="12">
+              <p>Имя</p>
+            </el-col>
+            <el-col :span="12">
+              <p>Полный адрес</p>
+            </el-col>
+          </el-row>
+          <el-row>
 
-            </el-form-item>
+            <el-col :span="12">
 
-            <el-form-item label="Полный адрес" >
 
-                <el-input
-                    id="in"
-                    v-model="form.full_address"
-                    autocomplete="off">
-                </el-input>
+                  <el-input
+                      id="in"
+                      v-model="form.name"
+                      autocomplete="off"
+                      size="mini">
+                  </el-input>
 
-             </el-form-item>
+          </el-col>
+            <el-col :span="12">
 
-            <el-form-item label="Город" >
+                  <el-input
+                      id="in"
+                      v-model="form.full_address"
+                      autocomplete="off"
+                      size="mini">
+                  </el-input>
 
-                <el-input
-                    id="in"
-                    v-model="form.id_street" >
-                </el-input>
+          </el-col>
+          </el-row>
+          <el-row>
+              <el-col :span="12">
+                <p>Город</p>
+              </el-col>
+              <el-col :span="12">
+                <p>Район</p>
+              </el-col>
+          </el-row>
 
-             </el-form-item>
 
-            <el-form-item label="Район" >
+          <el-row>
+            <el-col :span="12">
 
-                <el-input
-                    id="in"
-                    v-model="form.id_city" >
-                </el-input>
 
-                 </el-form-item>
+                  <el-input
+                      id="in"
+                      v-model="form.id_street"
+                      size="mini">
+                  </el-input>
 
-             <el-form-item label="Статус" >
+
+          </el-col>
+            <el-col :span="12">
+
+
+                  <el-input
+                      id="in"
+                      v-model="form.id_city"
+                      size="mini">
+                  </el-input>
+
+
+
+          </el-col>
+          </el-row>
+
+          <el-row>
+              <el-col :span="12">
+                <p>Статус</p>
+              </el-col>
+              <el-col :span="12">
+                <p>Владелец</p>
+              </el-col>
+          </el-row>
+
+          <el-row>
+            <el-col :span="12">
+
+                  <el-input
+                     id="in"
+                     v-model="form.id_status"
+                     size="mini">
+                 </el-input>
+
+          </el-col>
+            <el-col :span="12">
+
+
                  <el-input
-                    id="in"
-                    v-model="form.id_status" >
-                </el-input>
-             </el-form-item>
-
-             <el-form-item label="Владелец" >
-
-                <el-input
-                    id="in"
-                    v-model="form.owner" >
-                </el-input>
-
-             </el-form-item>
-
-             <el-form-item label="Информация о владельце" >
-
-                <el-input
-                    id="in"
-                    v-model="form.owner_info" >
-                </el-input>
-
-             </el-form-item>
-
-             <el-form-item label="ip address" >
-
-                <el-input
-                    id="in"
-                    v-model="form.ip_address" >
-                </el-input>
-
-             </el-form-item>
-
-             <el-form-item label="latitude" >
-
-                <el-input
-                    id="in"
-                    v-model="form.latitude" >
-                </el-input>
-
-             </el-form-item>
-
-             <el-form-item label="longitude" >
-
-                <el-input
-                    id="in"
-                    v-model="form.longitude" >
-                </el-input>
-
-             </el-form-item>
-
-             <el-form-item label="Угол обзора" >
-
-                <el-input
-                    id="in"
-                    v-model="form.viewong_angle" >
-                </el-input>
-
-             </el-form-item>
-
-             <el-form-item label="Описание" >
-
-                <el-input
-                    id="in"
-                    v-model="form.description" >
-                </el-input>
-             </el-form-item>
+                     id="in"
+                     v-model="form.owner"
+                     size="mini">
+                 </el-input>
 
 
-             <el-form-item>
+          </el-col>
+          </el-row>
+
+          <el-row>
+              <el-col :span="12">
+                <p>Информация о владельце</p>
+              </el-col>
+              <el-col :span="12">
+                <p>ip address</p>
+              </el-col>
+          </el-row>
+
+          <el-row>
+            <el-col :span="12">
+
+
+                 <el-input
+                     id="in"
+                     v-model="form.owner_info"
+                     size="mini">
+                 </el-input>
+
+
+          </el-col>
+            <el-col :span="12">
+
+
+                 <el-input
+                     id="in"
+                     v-model="form.ip_address"
+                     size="mini">
+                 </el-input>
+
+
+          </el-col>
+          </el-row>
+
+          <el-row>
+              <el-col :span="12">
+                <p>Угол обзора</p>
+              </el-col>
+              <el-col :span="12">
+                <p>Описание</p>
+              </el-col>
+          </el-row>
+
+          <el-row>
+            <el-col :span="12">
+
+
+               <el-input
+                   id="in"
+                   v-model="form.viewong_angle"
+                   size="mini">
+               </el-input>
+
+
+          </el-col>
+            <el-col :span="12">
+
+
+                 <el-input
+                     id="in"
+                     v-model="form.description"
+                     size="mini">
+                 </el-input>
+
+
+
+          </el-col>
+          </el-row>
 
                 <el-button
                     type="info"
+                    @click="onSubmit"
                     plain >
                     Добавить
                 </el-button>
                 <el-button
-                    @click="resetForm('ruleForm')">
+                    @click="reset">
                     Сброс
                 </el-button>
-
-             </el-form-item>
 
         </el-form>
 
@@ -142,21 +201,47 @@ export default {
   data() {
     return {
       form: {
+
         name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        full_address: '',
+        id_street: '',
+        id_city: '',
+        id_status: '',
+        owner: '',
+        owner_info: '',
+        ip_address: '',
+        viewong_angle: '',
+        description: '',
       }
     }
-},}
+},
+
+methods: {
+      onSubmit() {
+        console.log(this.form);
+      },
+
+      reset() {
+        this.form =  {
+          name: '',
+          full_address: '',
+          id_street: '',
+          id_city: '',
+          id_status: '',
+          owner: '',
+          owner_info: '',
+          ip_address: '',
+          viewong_angle: '',
+          description: '',
+        }
+      }
+
+
+}
 
 
 
-
+}
 
 
 
@@ -164,13 +249,24 @@ export default {
 
 
 <style lang="scss">
-el-form-item {
-    background-color: #FFFFFF;
-    color: #FFFFFF;
+p {
+
+    margin-bottom: 3%;
+    margin-left: 1%;
+    color: #606266;
+    font-size: 90%;
+    text-align: left;
+    font-family: 'Helvetica Neue';
+
+
 
 }
+
+
+
 #in {
-    width: 90%;
+    width: 80%;
+    margin-bottom: 3%;
 
 
 }
@@ -179,15 +275,14 @@ el-form-item {
     height: 100% ;
     width: 70%;
     margin:0% auto;
-    margin-left:15%;
-    margin-right:10%;
+
     padding-right:3%;
     padding-left:3%;
     padding-top: 3%;
-    padding-bottom: 3%;
+    padding-bottom: 2%;
     text-align: center;
-    border: 1px #EBEEF5;
-    box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.1);
+    border: 8px #EBEEF5;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.1);
 
 }
 

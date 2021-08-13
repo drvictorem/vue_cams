@@ -105,6 +105,7 @@ export default {
             this.$router.push({name: 'page_map' , params: { dataSearch: this.selectedRow }})
     },
         showdata(data) {
+            
             this.show_table = true
             this.tableData = []
             let one = JSON.stringify(data)

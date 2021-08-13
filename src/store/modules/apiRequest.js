@@ -5,6 +5,7 @@ export default {
     state: {
 
         cameras:[],
+        error: '',
 
     },
 
@@ -20,7 +21,7 @@ export default {
                   })
             .then(response => {
 
-                ctx.commit('getall', response.data)
+                ctx.commit('pushAll', response.data)
 
                 return response
 
@@ -28,9 +29,11 @@ export default {
             .catch(error => {
 
                 console.log(error)
-                ctx.commit('getall', [])
+                let message = error.message
+                ctx.commit('pushAll', [])
+                ctx.commit('pushError', message)
 
-                return error
+                // return error
 
             }
             );
@@ -50,9 +53,8 @@ export default {
                     }
                   })
             .then(response => {
-                console.log('+++')
 
-                ctx.commit('getsearch', response.data)
+                ctx.commit('pushFromSearch', response.data)
                 console.log(response)
                 return response
 
@@ -60,20 +62,31 @@ export default {
             .catch(error => {
 
                 console.log(error)
-                ctx.commit('getsearch', [])
-                return error
 
+                let message = error.message
+                ctx.commit('pushFromSearch', [])
+                ctx.commit('pushError', message)
+
+                // return error
             });
 
         },
+
+        resetError(ctx) {
+          ctx.commit('pushError', '')
+        }
     },
     mutations: {
-        getall(state, response) {
+        pushAll(state, response) {
             state.cameras = response
 
         },
-        getsearch(state, response) {
+        pushFromSearch(state, response) {
             state.cameras = response
+
+        },
+        pushError(state, response) {
+            state.error = response
 
         }
 
@@ -83,6 +96,9 @@ export default {
 
         getCams(state){
             return state.cameras
+        },
+        getError(state){
+            return state.error
         }
 
     },

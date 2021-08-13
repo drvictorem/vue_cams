@@ -15,7 +15,7 @@ import "leaflet.markercluster"
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-
+let cluster = null
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -23,9 +23,9 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const createMarkerCluster = () => {
-    return L.markerClusterGroup();
-}
+// const createMarkerCluster = () => {
+//     return L.markerClusterGroup();
+// }
 
 
 export default {
@@ -40,7 +40,8 @@ export default {
         OSMUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         zoom: 13,
         show:false,
-        marker:[]
+        marker:[],
+        layer: null,
     };
   },
 
@@ -53,9 +54,9 @@ export default {
 
           this.createMap(this.centerCoordinates,this.zoom)
 
-
-
           let dataFromSearch = JSON.parse(this.$route.params.dataSearch)
+
+          this.fly(dataFromSearch)
 
           this.addClusterToMap(dataFromSearch)
 
@@ -67,6 +68,8 @@ export default {
 
 
       }
+
+      
 
 
 
@@ -81,10 +84,22 @@ export default {
     }).addTo(this.map);
 },
 
+    fly(data) {
+
+      let length = Object.keys(data).length
+
+      if (length < 50) {
+        let coordinates = [data[0]['latitude'],data[0]['longitude']]
+         return this.map.flyTo(coordinates, 12)
+
+      }
+
+      return this.map.flyTo(this.centerCoordinates,11)
+    },
+
     showButtonMarker(text) {
 
         this.show = true;
-
         this.$emit('clickOnMarker', {
             show:this.show,
 
@@ -114,16 +129,24 @@ export default {
 
     },
 
+    removeMarker(data) {
+      if (data) {
+
+            this.map.removeLayer(data)
+
+        }
+    },
+
     addClusterToMap (obj) {
         let length = Object.keys(obj).length
-        let cluster = this.createMarkerCluster();
+        cluster = this.createMarkerCluster();
         for(let i=0; i < length; i++) {
             if(obj[i]['alt'] != ''){
                 let alt = obj[i]['latitude']
                 let lon = obj[i]['longitude']
-                let createMarker = this.createMarker([alt,lon],obj[i]['full_address'])
-                this.marker = createMarker
-                cluster.addLayer(this.marker)
+                this.layer = this.createMarker([alt,lon],obj[i]['full_address'])
+                this.marker.push([alt,lon])
+                cluster.addLayer(this.layer)
             }
         }
 
@@ -132,11 +155,14 @@ export default {
     },
 
     showMarker(data) {
+
         if (data) {
-            this.map.removeLayer(this.marker)
+
+            this.removeMarker(cluster)
+
             console.log(data)
-            this.marker = data
-            this.addClusterToMap(this.marker)
+            this.fly(data)
+            this.addClusterToMap(data)
         } else {
             console.log('error')
         }
