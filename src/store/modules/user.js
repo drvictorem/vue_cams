@@ -1,58 +1,71 @@
 export default {
 
     state: {
-        status: '',
+        status: null,
         user:[{
             login: "rt",
             password: "123"
         }],
-        showErrorMessage: null,
+
 
     },
 
     actions: {
-        login(ctx, user){
+        logon(ctx, user){
 
             ctx.commit('request', 'await')
 
             console.log(user)
 
             if (user.login == 'rt'){
-                ctx.commit('success','success')
+
+
+
+                let authStatus = JSON.stringify('success')
+                localStorage.setItem("authStatus", authStatus)
+                console.log(authStatus)
+                ctx.commit('statusAuth','success')
+
+                return 'success'
+
+
             } else {
-                // ctx.commit()
-                ctx.commit('error','error')
+
+                let authStatus = JSON.stringify('error')
+                localStorage.setItem("authStatus", authStatus)
+
+                ctx.commit('statusAuth','error')
+
+                return 'error'
             }
 
 
         },
 
-        incorrectLogin(ctx,user) {
+        logout(ctx) {
 
-          ctx.commit('status')
+          localStorage.removeItem("authStatus")
+          ctx.commit('statusAuth', null)
 
         },
+
+        incorrectLogin(ctx) {
+          ctx.commit('statusAuth','error')
+        }
+
     },
     mutations: {
+
         request(state,data) {
             state.status = data
             console.log(state.status)
         },
-        success(state,data) {
-            state.status = data
-            console.log(state.status)
-        },
-        error(state,data) {
-            state.status = data
-            state.showErrorMessage = true
-            console.log(state.showErrorMessage)
 
+        statusAuth(state,data) {
+          state.status = data
+          console.log(state.status)
         },
-        status(state) {
-          // console.log(72873)
-          state.showErrorMessage = true
-          console.log(state.showErrorMessage)
-        }
+
     },
 
     getters: {
@@ -62,10 +75,6 @@ export default {
         getUser(state) {
             console.log(state.user)
             return state.user[0].login
-        },
-        getStatusMessage(state) {
-
-          return state.showErrorMessage
         }
     },
 }

@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record =>
         record.meta.requiresAuth)) {
 
-        let status = JSON.parse(localStorage.getItem('authUser'))
+        let status = JSON.parse(localStorage.getItem('authStatus'))
         if (status == 'success'){
           // console.log(this.$store.getters('getUser'))
 

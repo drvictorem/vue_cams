@@ -1,5 +1,5 @@
 <template>
-  <div class="age_map">
+  <div class="page_map">
       <Nav />
       <Map />
 
@@ -20,41 +20,24 @@ export default {
     Map,
 
   },
-  // computed: {
-  //
-  //   errorMessageFromRe() {
-  //
-  //     if(this.$store.getters.getStatusMessage === true) {
-  //
-  //               this.errorMessage()
-  //             }
-  //     return this.$store.getters.getStatusMessage
-  //   },
-  //
-  // },
-  //
-  //
-  // watch: {
-  //
-  //   'statusMessage': {
-  //     handler() {
-  //       this.errorMessage()
-  //
-  //     }
-  //   },
-  //   // deep: true
-  //
-  // },
-  //
-  // methods: {
-  //   errorMessage() {
-  //     this.$message.error('Некорректные данные')
-  //   },
-  // }
+
 }
 </script>
 
 
 <style lang="scss">
+// html {
+//   overflow:  hidden;
+// }
+
+
+
+
+#page_map {
+  height: 100%;
+  width: 100%;
+  margin: 0%;
+  // overflow:  hidden;
+}
 
 </style>

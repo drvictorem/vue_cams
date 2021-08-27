@@ -1,5 +1,5 @@
 <template>
-
+    <!-- <Nav /> -->
     <MapBackground ref="mapbck" @clickOnMarker = "showBtnModal"/>
         <div id="panel">
             <div id = "button">
@@ -56,6 +56,7 @@ import MapModal from './MapModal.vue'
 import MapBackground from './MapBackground.vue'
 import VideoPlayer from './VideoPlayer.vue'
 import Autocomplite from './Autocomplite.vue'
+// import Nav from '@/components/Nav.vue'
 
 export default {
 
@@ -68,6 +69,7 @@ export default {
       VideoPlayer,
 
       Autocomplite,
+      // Nav,
 
 
 
@@ -149,8 +151,11 @@ export default {
                   console.log(response.data)
 
                   this.$refs.mapbck.showMarker(response.data);
+
                 } else {
+
                   this.$message.error(this.$store.getters.getError);
+
                 }
             })
 
@@ -203,7 +208,7 @@ export default {
 }
 
 #panel {
-    position: absolute;
+    position: fixed;
     right: 0%;
     width: 22%;
     padding: 0%;
@@ -211,6 +216,7 @@ export default {
     z-index: 1000;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
+    overflow: auto;
 
 }
 #getall {

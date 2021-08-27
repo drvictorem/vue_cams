@@ -69,11 +69,6 @@ export default {
 
       }
 
-      
-
-
-
-
   },
 
   methods: {
@@ -94,7 +89,7 @@ export default {
 
       }
 
-      return this.map.flyTo(this.centerCoordinates,11)
+      return this.map.flyTo(this.centerCoordinates,12)
     },
 
     showButtonMarker(text) {
@@ -112,6 +107,7 @@ export default {
             return L.marker(latlng)
             .bindPopup("<h2>"+text+"<h2>")
             .on('click', event => {
+                this.map.flyTo(latlng,17)
                 this.$emit('clickOnMarker', {
                 show: true,
                 text:text
@@ -141,7 +137,7 @@ export default {
         let length = Object.keys(obj).length
         cluster = this.createMarkerCluster();
         for(let i=0; i < length; i++) {
-            if(obj[i]['alt'] != ''){
+            if(obj[i]['latitude'] != ''){
                 let alt = obj[i]['latitude']
                 let lon = obj[i]['longitude']
                 this.layer = this.createMarker([alt,lon],obj[i]['full_address'])
@@ -179,8 +175,8 @@ export default {
   cursor: default;
   position: absolute;
   width: 100%;
-  height: 100%;
-  margin:0px auto;
+  height: 90%;
+  margin: 0px;
   text-align: center;
 
 }

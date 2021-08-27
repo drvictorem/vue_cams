@@ -6,6 +6,7 @@ export default {
 
         cameras:[],
         error: '',
+        statusResponse:'',
 
     },
 
@@ -74,7 +75,34 @@ export default {
 
         resetError(ctx) {
           ctx.commit('pushError', '')
-        }
+        },
+
+        addNewCams(ctx, body) {
+          console.log(body)
+          return axios
+          .post('http://10.0.0.19:1111/cams_viewer/api/cams/add_new_cam',body,{
+             headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+                    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+                  }
+                })
+            .then(response => {
+              console.log(response)
+              ctx.commit('pushResponse', response)
+            })
+            .catch(error => {
+
+                console.log(error)
+
+
+                ctx.commit('pushResponse', error.message)
+
+
+            });
+        },
+
+
     },
     mutations: {
         pushAll(state, response) {
@@ -88,6 +116,9 @@ export default {
         pushError(state, response) {
             state.error = response
 
+        },
+        pushResponse(state, response) {
+          state.statusResponse = response
         }
 
     },
@@ -99,6 +130,9 @@ export default {
         },
         getError(state){
             return state.error
+        },
+        getStatusResponse(state) {
+          return state.statusResponse
         }
 
     },

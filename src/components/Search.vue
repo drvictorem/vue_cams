@@ -1,13 +1,13 @@
 <template>
     <div>
             <el-row :gutter="20">
-                <el-col :span="20" style="margin-left: 13%;">
+                <el-col :span="20" style="margin-left: 13%;  position: relative; z-index: 99; ">
                     <Autocomplite @responseInput = "showdata" />
                 </el-col>
                 <el-col
                     v-if="redirectButton"
                     :span="24"
-                    style=" margin-top: 1%; margin-left: -39%; ">
+                    style=" margin-top: 1%; margin-left: -39%;">
                     <el-button
                         type="success"
                         round size="mini"
@@ -22,7 +22,7 @@
                 v-loading="loading"
                 v-show = "show_table"
                  :data="tableData"
-                 style="width: 100%; margin-top:3%;"
+                 style="width: 100%; margin-top:3%; top:0;  position: relative; "
                  @selection-change="selected"
                  border>
                     <el-table-column
@@ -105,7 +105,7 @@ export default {
             this.$router.push({name: 'page_map' , params: { dataSearch: this.selectedRow }})
     },
         showdata(data) {
-            
+
             this.show_table = true
             this.tableData = []
             let one = JSON.stringify(data)

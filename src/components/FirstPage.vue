@@ -29,7 +29,7 @@
 </template>
 
 <script>
-
+import { mapActions,mapGetters } from 'vuex'
 import routes from '../router/index.js'
 import axios from 'axios'
 
@@ -41,51 +41,66 @@ export default {
             login: "",
             password: ""
         }
-
     },
 
     computed: {
-        loggenIn() {
 
-            return this.$store.getters.getStatus
-        }
+      ...mapGetters(["getStatus"])
+        
+    },
+
+    mounted() {
+
+
+
+      if (this.getStatus == 'error') {
+
+        this.$emit('invalidData')
+
+      }
     },
 
 
 
     methods: {
+
+      ...mapActions(['logon']),
+
+
         authorization() {
+
+
+
             let user = {
+
                 login:this.login,
                 password:this.password
-            }
-            this.$store.dispatch('login',user)
-            if (this.loggenIn == 'success') {
 
-                let authUser = JSON.stringify(this.loggenIn)
-                localStorage.setItem("authUser", authUser)
+            }
+
+            this.logon(user)
+            .then((response) => {
+
+              if (response == 'success') {
+
+
+
                 this.$router.replace('/map')
 
-                this.login = ""
-                this.password = ""
+              } else {
 
-            }
-            if (this.loggenIn == 'error') {
 
-              let authUser = JSON.stringify(this.loggenIn)
-              localStorage.setItem("authUser", authUser)
+                  this.$emit('invalidData')
 
-              this.$emit('invalidData')
+                  this.login = ""
+                  this.password = ""
+              }
+              console.log(localStorage.getItem('authStatus'))
+            })
 
-              this.login = ""
-              this.password = ""
-
-            }
 
         },
-
-        }
-
+      }
     }
 
 
